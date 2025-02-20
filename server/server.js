@@ -74,6 +74,8 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
          // Define user-specific folder inside 'uploads'
         const userFolder = path.join(UPLOADS_DIR, userToken);
+        console.log('User folder:', userFolder);
+
         await fs.mkdir(userFolder, { recursive: true });
 
         // Move uploaded file to user-specific folder
@@ -98,10 +100,10 @@ app.get('/api/uploads', async (req, res) => {
         // Define the limit to load images. By default, it loads 9 images
         const limit = req.query.limit || 9;
 
-        // Define user-specific folder inside 'uploads'
+        // Define user-specific folder inside 'uploads'. So it's uploads/userToken
         const userFolder = path.join(UPLOADS_DIR, userToken);
         const images = await getGalleryImages(UPLOADS_DIR, limit);
-        const urlImages = images.map(image => `/${userFolder}/${path.basename(image)}`);
+        const urlImages = images.map(image => `uploads/${userToken}/${path.basename(image)}`);
         
         res.json(urlImages);
     } catch (error) {
