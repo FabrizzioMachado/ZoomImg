@@ -1,14 +1,19 @@
-//import { getGalleryImages } from "./getImages.js";
-
 // Common variables 
 const container = document.getElementById('galleryContainer');
 const galleryTitle = document.getElementById('galleryTitle');
+
+// Generate a unique user token if not gotten from the localStorage
+let userToken = localStorage.getItem("userToken");
+if (!userToken) {
+    userToken = Math.random().toString(36).substr(2, 10);
+    localStorage.setItem("userToken", userToken);
+}
 
 // Fetch and display images
 export async function loadImages(limit = 9) {
     try {
         const response = await fetch(`/api/uploads?limit=${limit}`);
-        const images = Object.values(await response.json())
+        const images = await response.json();
         console.log(images, 'images');
         
         //dynamic response if no images

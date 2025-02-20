@@ -58,20 +58,31 @@ app.set('view engine', 'ejs');
 
 // Serve static files
 app.use(express.static(path.join(CLIENT_PATH, 'public')));
-app.use('/uploads', express.static(UPLOADS_DIR));
+app.use('/uploads', express.static(UPLOADS_DIR, { extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp'] }))
 
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', upload.single('image'), async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).send('No file uploaded.');
-        }
-        const imagePath = `/uploads/${req.file.filename}`;
-        res.render('result', { imagePath });
+        const userToken = req.body.userToken;
+
+        if(!userToken) return res.status(401).send('Missing User');
+        if (!req.file) return res.status(400).send('No file uploaded.');
+
+         // Define user-specific folder inside 'uploads'
+        const userFolder = path.join(UPLOADS_DIR, userToken);
+        await fs.mkdir(userFolder, { recursive: true });
+
+        // Move uploaded file to user-specific folder
+        const newFilePath = path.join(userFolder, req.file.filename);
+        await fs.rename(req.file.path, newFilePath);
+
+        // The user just sees his own images
+        res.json({ success: true, imagePath: `/uploads/${userToken}/${req.file.filename}` });
+
     } catch (error) {
         console.error('Error in /upload route:', error);
         res.status(500).send('Internal Server Error');
@@ -81,9 +92,16 @@ app.post('/upload', upload.single('image'), (req, res) => {
 // Apply the function to get the first 9 images of the uploads folder
 app.get('/api/uploads', async (req, res) => {
     try {
-        const folder = req.query.folder || 'uploads';
-        const images = await getGalleryImages(UPLOADS_DIR, 9);
-        const urlImages = images.map(image => `/${folder}/${path.basename(image)}`);
+        const userToken = req.query.userToken; // Get user token
+        if (!userToken) return res.status(400).json({ error: 'Missing user token.' });
+
+        // Define the limit to load images. By default, it loads 9 images
+        const limit = req.query.limit || 9;
+
+        // Define user-specific folder inside 'uploads'
+        const userFolder = path.join(UPLOADS_DIR, userToken);
+        const images = await getGalleryImages(UPLOADS_DIR, limit);
+        const urlImages = images.map(image => `/${userFolder}/${path.basename(image)}`);
         
         res.json(urlImages);
     } catch (error) {
