@@ -1,0 +1,607 @@
+* {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#heroForm {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+}
+#heroForm nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.75em;
+  background: rgba(26, 26, 46, 0.7);
+  color: #fff;
+  display: flex;
+  transition: all 0.25s ease;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-size: 1.5em;
+  z-index: 1000;
+}
+#heroForm nav, #heroForm nav * {
+  box-sizing: border-box;
+}
+#heroForm nav.activeItems, #heroForm nav.activeSection {
+  transition: all 0.25s ease;
+}
+#heroForm nav.activeItems .nav-items, #heroForm nav.activeSection .nav-items {
+  width: 100%;
+}
+#heroForm nav.activeItems .nav-items .nav-logo a, #heroForm nav.activeSection .nav-items .nav-logo a, #heroForm nav.activeItems .nav-items .nav-logo, #heroForm nav.activeSection .nav-items .nav-logo {
+  width: 100vw;
+  flex-direction: row-reverse;
+  justify-content: space-between !important;
+}
+#heroForm nav.activeSection {
+  width: 100vw !important;
+  height: 100% !important;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  flex-direction: column;
+  text-align: center;
+}
+#heroForm nav.activeSection .nav-items {
+  background-color: #162447;
+}
+#heroForm nav .nav-items {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+#heroForm nav .nav-items .nav-item {
+  width: 100%;
+  padding: 15px;
+}
+#heroForm nav .nav-items .nav-item, #heroForm nav .nav-items .nav-item a {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  gap: 1em;
+  text-decoration: none;
+}
+#heroForm nav .nav-items .nav-item .nav-text, #heroForm nav .nav-items .nav-item a .nav-text {
+  display: none;
+  font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: opacity 0.3s ease;
+}
+#heroForm nav .nav-items .nav-item:hover .nav-text, #heroForm nav .nav-items .nav-item:hover .logo {
+  opacity: 1;
+}
+#heroForm nav .nav-items .nav-logo {
+  max-width: 100%;
+  display: none;
+}
+#heroForm nav .nav-items .nav-logo a span {
+  font-weight: bold;
+}
+#heroForm nav.activeSection #gallerySection.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#heroForm nav #gallerySection {
+  width: 100%;
+  display: none;
+  z-index: 999;
+  position: relative;
+  padding: 1em 0;
+  overflow-y: scroll;
+  height: 100%;
+}
+#heroForm nav #gallerySection h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+#heroForm nav #gallerySection #galleryContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-content: center;
+  justify-items: center;
+  gap: 1em;
+  padding: 0 1em;
+  overflow-y: scroll;
+  height: 100%;
+}
+#heroForm nav #gallerySection #galleryContainer .galleryItem {
+  width: clamp(10em, 15vw, 15em);
+  aspect-ratio: 1.75/1;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
+}
+#heroForm nav #gallerySection #galleryContainer .galleryItem img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.25s ease;
+}
+#heroForm nav #gallerySection #galleryContainer .galleryItem.active {
+  width: 90%;
+  height: 90vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  overflow: hidden;
+}
+#heroForm nav #gallerySection #galleryContainer .galleryItem.active .zoomOut {
+  position: absolute;
+  z-index: 1001;
+  top: 2.5%;
+  right: 1.5%;
+}
+@media screen and (min-width: 768px) {
+  #heroForm nav #gallerySection {
+    overflow-y: hidden !important;
+  }
+  #heroForm nav #galleryContainer {
+    grid-template-columns: repeat(3, minmax(25px, 1fr)) !important;
+    height: auto !important;
+  }
+  #heroForm nav #galleryContainer .galleryItem {
+    width: clamp(10em, 10em + 2.5vw, 12.5em) !important;
+  }
+  #heroForm nav #galleryContainer .galleryItem.active {
+    width: 90% !important;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #heroForm nav #galleryContainer {
+    grid-template-columns: repeat(3, minmax(250px, 1fr)) !important;
+  }
+}
+#heroForm nav #helpSection {
+  width: 100%;
+  display: none;
+  z-index: 999;
+  font-weight: bold;
+}
+#heroForm nav #helpSection #helpContainer {
+  height: 100vh;
+  width: min(85%, 40em) !important;
+  letter-spacing: -0.05em;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+#heroForm nav #helpSection #helpContainer #helpText {
+  margin-bottom: 1em;
+  font-size: clamp(1.25em, 1em + 1vw, 2em);
+  line-height: 1em;
+}
+#heroForm nav #helpSection #helpContainer ul {
+  padding-inline: 5%;
+  list-style-type: circle;
+  font-size: clamp(0.8em, 0.5em + 1vw, 1.5em);
+  text-align: left !important;
+}
+#heroForm nav #helpSection #helpContainer ul li {
+  margin-bottom: 0.5em;
+}
+#heroForm nav.activeSection #helpSection.active {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+#heroForm nav #promoSection {
+  width: 100%;
+  display: none;
+  z-index: 999;
+  font-weight: bold;
+  margin: auto;
+  padding: 5%;
+}
+@keyframes snow {
+  0% {
+    opacity: 0;
+    transform: translateY(0em);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(40.625em);
+  }
+}
+@keyframes moveAndBlur {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-15px, -15px) scale(0.95) rotate(-3deg);
+  }
+  50% {
+    transform: translate(-5px, -5px) scale(1) rotate(5deg);
+  }
+  75% {
+    transform: translate(-10px, -10px) scale(0.95) rotate(-3deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes innerMoveAndBlur {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-15px, -15px) scale(0.95) rotate(-5deg);
+  }
+  50% {
+    transform: translate(-5px, -5px) scale(1) rotate(7deg);
+  }
+  75% {
+    transform: translate(-10px, -10px) scale(0.95) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes spaceX {
+  0%, 100% {
+    background-position: -100%;
+  }
+  50% {
+    background-position: 220%;
+  }
+}
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#heroForm nav #promoSection .card-container {
+  width: clamp(7.5em, 7.5em + 5vw, 25em);
+  margin: auto;
+  aspect-ratio: 2/3;
+  border-radius: 20px;
+  box-shadow: -50px 50px 100px #1a1a1a, 50px -50px 100px #1a1a1a;
+}
+#heroForm nav #promoSection .card-container.move-card {
+  animation: moveAndBlur 20s infinite alternate;
+}
+#heroForm nav #promoSection .card-container .card {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--colorLeft), #1c1c1c, var(--colorRight));
+  border-radius: 0.5em;
+  box-shadow: -15px -15px 10px var(--colorLeft), 10px -10px 15px var(--colorRight), 10px 10px 10px var(--colorRight), -10px 10px 10px var(--colorRight);
+  transition: all 1s ease-in-out;
+}
+#heroForm nav #promoSection .card-container .card .socialMedia {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+  color: white;
+  font-size: 1.5em;
+}
+#heroForm nav #promoSection .card-container .card .image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#heroForm nav #promoSection .card-container .card.inner-move-card img {
+  animation: innerMoveAndBlur 20s infinite alternate;
+}
+#heroForm nav #promoSection .card-container .card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(0.9);
+}
+#heroForm nav #promoSection .card-container .card .cardContent {
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#heroForm nav #promoSection .card-container .card .cardText {
+  width: 90%;
+  font-size: clamp(0.5em, 1.5vw, 0.75em);
+  background: rgba(0, 0, 0, 0.5);
+}
+#heroForm nav #promoSection .card-container .card:hover {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, var(--colorRight) 15%, var(--colorLeft) 35%, var(--colorLeft) 50%, transparent 100%);
+  animation: spaceX 25s infinite alternate, sparkle 5s infinite;
+}
+#heroForm nav #promoSection .box-of-star1,
+#heroForm nav #promoSection .box-of-star2,
+#heroForm nav #promoSection .box-of-star3,
+#heroForm nav #promoSection .box-of-star4 {
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  transform: translateY(0em);
+  height: 43.75em;
+}
+#heroForm nav #promoSection .box-of-star1.box-of-star1,
+#heroForm nav #promoSection .box-of-star2.box-of-star1,
+#heroForm nav #promoSection .box-of-star3.box-of-star1,
+#heroForm nav #promoSection .box-of-star4.box-of-star1 {
+  animation: snow 5s linear infinite;
+}
+#heroForm nav #promoSection .box-of-star1.box-of-star2,
+#heroForm nav #promoSection .box-of-star2.box-of-star2,
+#heroForm nav #promoSection .box-of-star3.box-of-star2,
+#heroForm nav #promoSection .box-of-star4.box-of-star2 {
+  animation: snow 5s -1.64s linear infinite;
+}
+#heroForm nav #promoSection .box-of-star1.box-of-star3,
+#heroForm nav #promoSection .box-of-star2.box-of-star3,
+#heroForm nav #promoSection .box-of-star3.box-of-star3,
+#heroForm nav #promoSection .box-of-star4.box-of-star3 {
+  animation: snow 5s -2.3s linear infinite;
+}
+#heroForm nav #promoSection .box-of-star1.box-of-star4,
+#heroForm nav #promoSection .box-of-star2.box-of-star4,
+#heroForm nav #promoSection .box-of-star3.box-of-star4,
+#heroForm nav #promoSection .box-of-star4.box-of-star4 {
+  animation: snow 5s -3.3s linear infinite;
+}
+#heroForm nav #promoSection .star {
+  width: 0.1875em;
+  height: 0.1875em;
+  background-color: #FFF;
+  position: absolute;
+  z-index: 10;
+  opacity: 0.7;
+}
+#heroForm nav #promoSection .star:before {
+  content: "";
+  width: 0.375em;
+  height: 0.375em;
+  background-color: var(--colorLeft);
+  position: absolute;
+  z-index: 10;
+  top: 5em;
+  left: 4.375em;
+  opacity: 0.7;
+}
+#heroForm nav #promoSection .star:after {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  background-color: var(--colorRight);
+  position: absolute;
+  z-index: 10;
+  top: 0.5em;
+  left: 10.625em;
+  opacity: 0.9;
+}
+#heroForm nav #promoSection .star-position1 {
+  top: 1.875em;
+  left: 1.25em;
+}
+#heroForm nav #promoSection .star-position2 {
+  top: 6.875em;
+  left: 15.625em;
+}
+#heroForm nav #promoSection .star-position3 {
+  top: 3.75em;
+  left: 35.625em;
+}
+#heroForm nav #promoSection .star-position4 {
+  top: 7.5em;
+  left: 56.25em;
+}
+#heroForm nav #promoSection .star-position5 {
+  top: 1.25em;
+  left: 70em;
+}
+#heroForm nav #promoSection .star-position6 {
+  top: 5.625em;
+  left: 80em;
+}
+#heroForm nav #promoSection .star-position7 {
+  top: 1.875em;
+  left: 92.5em;
+}
+#heroForm nav #promoSection #promoContainer {
+  width: 100%;
+  max-width: 40em;
+  padding: calc(2em - 1.5%) 5%;
+  gap: 2em;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  #heroForm nav #promoSection #promoContainer {
+    flex-direction: row !important;
+  }
+}
+#heroForm nav #promoSection #promoContainer .promoCardContainer {
+  width: 100%;
+}
+#heroForm nav.activeSection #promoSection.active {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+@media screen and (min-width: 1024px) {
+  #heroForm nav {
+    width: 2.25em;
+    height: 100vh !important;
+  }
+  #heroForm nav.activeItems, #heroForm nav.activeSection {
+    width: 225px;
+  }
+  #heroForm nav.activeSection {
+    flex-direction: row;
+  }
+  #heroForm nav .nav-items {
+    max-width: 225px;
+    background-color: #162447;
+    height: 100vh;
+    flex-direction: column;
+  }
+  #heroForm nav .nav-items .nav-item, #heroForm nav .nav-items .nav-item a {
+    justify-content: flex-start !important;
+  }
+  #heroForm nav .nav-items .nav-logo a, #heroForm nav .nav-items .nav-logo {
+    display: flex !important;
+  }
+  #heroForm nav .nav-items, #heroForm nav .nav-items a {
+    align-items: center;
+  }
+  #heroForm nav .nav-items .nav-text, #heroForm nav .nav-items a .nav-text {
+    display: block !important;
+  }
+}
+#heroForm .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  z-index: -1;
+  overflow: hidden;
+}
+#heroForm .background #backgroundVideo {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.25;
+}
+#heroForm .appContainer {
+  width: min(90em, 90%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+#heroForm .appContainer h1 {
+  font-size: clamp(2em, 10vw, 6em);
+  margin-bottom: 1em;
+  padding: 0 1em;
+  margin: 0;
+}
+#heroForm .appContainer .buttonSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+  margin-top: 1em;
+  width: 100%;
+}
+#heroForm .appContainer .buttonSection form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#heroForm .appContainer .buttonSection form .fileUpload {
+  width: 100%;
+}
+#heroForm .appContainer .buttonSection form .fileUpload input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+#heroForm .appContainer .buttonSection form span {
+  display: none;
+}
+#heroForm .appContainer .buttonSection button {
+  cursor: pointer;
+  border: 0.25em solid #fff;
+  overflow: hidden;
+  border-radius: 0.5em;
+  background: none;
+  z-index: 10;
+  padding: 0.5em 0.75em;
+  font-size: 1.25em;
+}
+#heroForm .appContainer .buttonSection button#pseudoFileInput {
+  width: 10em;
+}
+#heroForm .appContainer .buttonSection button#submitbutton {
+  width: 2.5em;
+}
+#heroForm .appContainer footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(0.7em, 2vw, 0.8em);
+}
+#heroForm .appContainer footer a {
+  color: aquamarine;
+  text-decoration: none;
+}

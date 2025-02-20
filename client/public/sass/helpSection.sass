@@ -1,0 +1,32 @@
+@use 'centeredTextSection' as text
+
+@mixin helpSection
+    #helpSection
+        width: 100%
+        display: none
+        z-index: 999
+        font-weight: bold
+
+        #helpContainer
+            height: 100vh
+            width: min(85%, 40em) !important 
+            letter-spacing: -0.05em
+
+            @include text.centerText('c')
+
+            #helpText
+                margin-bottom: 1em
+                font-size: clamp(1.25em, 1em + 1vw, 2em)
+                line-height: 1em
+
+            ul
+                padding-inline: 5%
+                list-style-type: circle
+                font-size: clamp(0.8em, 0.5em + 1vw, 1.5em)
+                text-align: left !important
+                
+                li
+                    margin-bottom: 0.5em
+
+    &.activeSection #helpSection.active
+        @include text.centerText('c')

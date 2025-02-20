@@ -1,0 +1,13 @@
+@mixin centerText($direction: 'column') 
+    display: flex !important
+    align-items: center
+    justify-content: center
+    align-self: center
+    align-items: center
+
+    @if($direction == 'r')
+        flex-direction: row 
+    @else if($direction == 'c')
+        flex-direction: column
+    @else 
+        flex-direction: #{$direction}

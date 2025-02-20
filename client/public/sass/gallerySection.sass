@@ -1,0 +1,72 @@
+@mixin gallerySection
+    #gallerySection
+        width: 100%
+        display: none
+        z-index: 999
+        position: relative
+        padding: 1em 0
+        overflow-y: scroll
+        height: 100%
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        
+        h1
+            font-size: 2em
+            margin-bottom: 1em
+
+        #galleryContainer 
+            display: grid
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+            align-content: center
+            justify-items: center
+            gap: 1em
+            padding: 0 1em
+            overflow-y: scroll
+            height: 100%
+
+            .galleryItem
+                width: clamp(10em, 15vw, 15em)
+                aspect-ratio: 1.75/1
+                position: relative
+                cursor: pointer
+                overflow: hidden
+                clip-path: inset(0 0 0 0)
+                
+                img
+                    width: 100% 
+                    height: 100%
+                    object-fit: cover
+                    transition: all 0.25s ease
+
+                /* &.active
+                    width: 90%
+                    height: 90vh
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+                    z-index: 1001
+                    overflow: hidden */
+
+    @media screen and (min-width: 768px)
+        #gallerySection
+            overflow-y: hidden !important
+
+        #galleryContainer
+            grid-template-columns: repeat(3, minmax(25px, 1fr)) !important  // Adjust minmax for medium screens
+            height: auto !important
+
+            .galleryItem
+                width: clamp(10em, 10em + 2.5vw, 12.5em) !important
+
+                /*&.active
+                    width: 90% !important */
+
+    @media screen and (min-width: 1024px)
+        #galleryContainer
+            grid-template-columns: repeat(3, minmax(250px, 1fr)) !important  // Adjust minmax for medium screens
+
+
+    

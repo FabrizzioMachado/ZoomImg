@@ -1,0 +1,79 @@
+@use 'button'
+@use 'navbar'
+@use 'footer'
+@use 'background'
+
+*
+    color: #fff
+    margin: 0
+    padding: 0
+
+body
+    width: 100vw
+    height: 100vh
+    overflow: hidden
+    position: relative
+
+#heroForm
+    box-sizing: border-box
+    font-family: 'Roboto', sans-serif
+    height: 100vh
+
+    @include navbar.navbar
+
+    @include background.background
+
+    .appContainer
+        width: min(90em, 90%)
+        height: 100vh
+        display: flex
+        flex-direction: column
+        margin: auto
+        align-items: center
+        justify-content: center
+        text-align: center
+        overflow: hidden
+
+        h1
+            font-size: clamp(2em, 10vw, 6em)    
+            margin-bottom: 1em
+            padding: 0 1em
+            margin: 0
+            
+        .buttonSection
+            display: flex
+            align-items: center
+            justify-content: center
+            text-align: center
+            gap: 0
+            margin-top: 1em
+            width: 100%
+
+            form
+                display: flex
+                align-items: center
+                justify-content: center
+                text-align: center
+
+                .fileUpload
+                    width: 100%
+
+                    input
+                        position: absolute     
+                        top: 0
+                        left: 0
+                        visibility: hidden
+                        
+                span
+                    display: none
+
+            button
+                @include button.button
+
+                &#pseudoFileInput
+                    width: 10em
+
+                &#submitbutton
+                    width: 2.5em 
+
+        @include footer.footer

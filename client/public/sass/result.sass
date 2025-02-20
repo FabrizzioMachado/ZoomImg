@@ -1,0 +1,96 @@
+@use 'button'
+@use 'footer'
+@use 'background'
+
+*
+    color: #fff
+    margin: 0
+
+body
+    width: 100vw
+    height: 100vh
+    background: #181818
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    text-align: center
+
+    @include background.background
+
+#resultContainer
+    width: min(90em, 90%)
+    height: 100vh
+    margin: auto
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    align-content: center
+    position: relative
+    
+    .resultContainerCentered
+        width: 100%
+        height: calc(75% + 7.5vw)
+        display: flex
+        flex-direction: column
+        align-content: center
+        margin: auto
+        padding-bottom: 1.25em 
+
+        #returnHomeButtonTitle
+            position: relative
+            width: 100%
+            text-align: center
+
+            #returnHomeButton
+                @include button.button
+                position: fixed  // Fixed position for mobile
+                top: 1em  // Adjust top position
+                left: 1em  // Adjust left position
+                transform: none  // Remove transform
+                border-radius: 50%
+                padding: 0.5em 0.7em     
+                font-size: calc(0.5em + 0.5vw)  // Adjust font size for mobile with 1em
+                z-index: 100  // Ensure it's above other elements
+
+            #title
+                padding: 0.5em
+                font-size: calc(2em + 1vw) 
+        #imageContainer
+            width: 90%
+            height: 100%
+            aspect-ratio: 1.75/1
+            margin: 0 auto
+            position: relative
+            overflow: hidden
+            border: 1px solid #fff
+
+            #fullScreenButton
+                position: absolute
+                top: 2.5%
+                right: 1.5%
+                @include button.button
+                font-size: 1em
+                padding: 0.5em 0.60em     
+                z-index: 99
+
+                @media screen and (max-width: 768px)
+                    top: 1em  // Adjust top position for mobile
+                    right: 1em  // Adjust right position for mobile
+                    font-size: 0.8em  // Smaller font size for mobile
+                    padding: 0.4em 0.5em  // Smaller padding for mobile
+
+            .zoom
+                width: 100%
+                height: 100%
+                object-fit: cover
+                transition: transform 0.3s ease, transform-origin 0.3s ease
+                will-change: transform, transform-origin
+
+            &:hover .zoom
+                transform: scale(2)
+                transform-origin: center
+                transform:translate3d(10px, 10px, 0) 
+                z-index: 99
+
+    @include footer.footer

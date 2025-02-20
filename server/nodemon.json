@@ -1,0 +1,8 @@
+{
+    "watch": ["server.js", "views", "routes"], 
+    "ext": "js,json,ejs", 
+    "legacy-watch": true,
+    "events": {
+        "restart": "kill -9 $(lsof -t -i:3000)"
+    }
+}

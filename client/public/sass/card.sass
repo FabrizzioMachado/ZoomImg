@@ -1,0 +1,190 @@
+@mixin card
+    @keyframes snow
+        0%
+            opacity: 0
+            transform: translateY(0em)
+        15%
+            opacity: 1
+        100%
+            opacity: 1
+            transform: translateY(40.625em)
+
+    @keyframes moveAndBlur
+        0%
+            transform: translate(0, 0)
+        25%
+            transform: translate(-15px, -15px) scale(0.95) rotate(-3deg)
+        50%
+            transform: translate(-5px, -5px) scale(1) rotate(5deg)
+        75%
+            transform: translate(-10px, -10px) scale(0.95) rotate(-3deg)
+        100%
+            transform: translate(0, 0) scale(1)
+
+    @keyframes innerMoveAndBlur
+        0%
+            transform: translate(0, 0) scale(1)
+        25%
+            transform: translate(-15px, -15px) scale(0.95) rotate(-5deg)
+        50%
+            transform: translate(-5px, -5px) scale(1) rotate(7deg)
+        75%
+            transform: translate(-10px, -10px) scale(0.95) rotate(-5deg)
+        100%
+            transform: translate(0, 0) scale(1)
+
+    @keyframes spaceX
+        0%, 100%
+            background-position: -100%
+        50%
+            background-position: 220%
+
+    @keyframes sparkle
+        0%
+            transform: scale(1)
+        50%
+            transform: scale(1.05)
+        100%
+            transform: scale(1)
+
+    .card-container
+        width: clamp(7.5em, 7.5em + 5vw, 25em)
+        margin: auto
+        aspect-ratio: 2/3
+        border-radius: 20px
+        box-shadow: -50px 50px 100px #1a1a1a, 50px -50px 100px #1a1a1a
+
+        &.move-card
+            animation: moveAndBlur 20s infinite alternate
+
+        .card
+            position: relative
+            overflow: hidden
+            align-items: center
+            width: 100%
+            height: 100%
+            background: linear-gradient(135deg, var(--colorLeft), #1c1c1c, var(--colorRight))
+            border-radius: 0.5em
+            box-shadow: -15px -15px 10px var(--colorLeft), 10px -10px 15px var(--colorRight), 10px 10px 10px var(--colorRight), -10px 10px 10px var(--colorRight)
+            transition: all 1s ease-in-out
+
+            .socialMedia
+                position: absolute
+                z-index: 10
+                left: 0
+                bottom: 0
+                width: 100%
+                display: flex
+                justify-content: space-around
+                align-items: center
+                padding: 1em
+                color: white
+                font-size: 1.5em
+
+            .image
+                width: 100%
+                height: 100%
+                overflow: hidden
+                position: relative
+
+            &.inner-move-card img
+                animation: innerMoveAndBlur 20s infinite alternate
+
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+                filter: brightness(0.9)
+
+            .cardContent
+                width: 100%
+                position: absolute
+                z-index: 10
+                left: 0
+                bottom: 1vh
+                display: flex
+                flex-direction: column
+                align-items: center
+                justify-content: center
+
+            .cardText
+                width: 90%
+                font-size: clamp(0.5em, 1.5vw, 0.75em)
+                background: rgba(0, 0, 0, 0.5)
+
+            &:hover
+                background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, var(--colorRight) 15%, var(--colorLeft) 35%, var(--colorLeft) 50%, transparent 100%)
+                animation: spaceX 25s infinite alternate, sparkle 5s infinite
+
+    .box-of-star1,
+    .box-of-star2,
+    .box-of-star3,
+    .box-of-star4
+        width: 100%
+        position: absolute
+        z-index: 10
+        left: 0
+        top: 0
+        transform: translateY(0em)
+        height: 43.75em
+
+        &.box-of-star1
+            animation: snow 5s linear infinite
+        &.box-of-star2
+            animation: snow 5s -1.64s linear infinite
+        &.box-of-star3
+            animation: snow 5s -2.30s linear infinite
+        &.box-of-star4
+            animation: snow 5s -3.30s linear infinite
+
+    .star
+        width: 0.1875em
+        height: 0.1875em
+        background-color: #FFF
+        position: absolute
+        z-index: 10
+        opacity: 0.7
+
+        &:before
+            content: ""
+            width: 0.375em
+            height: 0.375em
+            background-color: var(--colorLeft)
+            position: absolute
+            z-index: 10
+            top: 5em
+            left: 4.375em
+            opacity: 0.7
+
+        &:after
+            content: ""
+            width: 0.5em
+            height: 0.5em
+            background-color: var(--colorRight)
+            position: absolute
+            z-index: 10
+            top: 0.5em
+            left: 10.625em
+            opacity: 0.9
+
+    .star-position1
+        top: 1.875em
+        left: 1.25em
+    .star-position2
+        top: 6.875em
+        left: 15.625em
+    .star-position3
+        top: 3.75em
+        left: 35.625em
+    .star-position4
+        top: 7.5em
+        left: 56.25em
+    .star-position5
+        top: 1.25em
+        left: 70em
+    .star-position6
+        top: 5.625em
+        left: 80em
+    .star-position7
+        top: 1.875em
+        left: 92.5em

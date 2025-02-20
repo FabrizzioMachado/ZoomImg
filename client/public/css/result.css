@@ -1,0 +1,141 @@
+* {
+  color: #fff;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #181818;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  z-index: -1;
+  overflow: hidden;
+}
+body .background #backgroundVideo {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.25;
+}
+
+#resultContainer {
+  width: min(90em, 90%);
+  height: 100vh;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  position: relative;
+}
+#resultContainer .resultContainerCentered {
+  width: 100%;
+  height: calc(75% + 7.5vw);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: auto;
+  padding-bottom: 1.25em;
+}
+#resultContainer .resultContainerCentered #returnHomeButtonTitle {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+#resultContainer .resultContainerCentered #returnHomeButtonTitle #returnHomeButton {
+  cursor: pointer;
+  border: 0.25em solid #fff;
+  overflow: hidden;
+  border-radius: 0.5em;
+  background: none;
+  z-index: 10;
+  padding: 0.5em 0.75em;
+  font-size: 1.25em;
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  transform: none;
+  border-radius: 50%;
+  padding: 0.5em 0.7em;
+  font-size: calc(0.5em + 0.5vw);
+  z-index: 100;
+}
+#resultContainer .resultContainerCentered #returnHomeButtonTitle #title {
+  padding: 0.5em;
+  font-size: calc(2em + 1vw);
+}
+#resultContainer .resultContainerCentered #imageContainer {
+  width: 90%;
+  height: 100%;
+  aspect-ratio: 1.75/1;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #fff;
+}
+#resultContainer .resultContainerCentered #imageContainer #fullScreenButton {
+  position: absolute;
+  top: 2.5%;
+  right: 1.5%;
+  cursor: pointer;
+  border: 0.25em solid #fff;
+  overflow: hidden;
+  border-radius: 0.5em;
+  background: none;
+  z-index: 10;
+  padding: 0.5em 0.75em;
+  font-size: 1.25em;
+  font-size: 1em;
+  padding: 0.5em 0.6em;
+  z-index: 99;
+}
+@media screen and (max-width: 768px) {
+  #resultContainer .resultContainerCentered #imageContainer #fullScreenButton {
+    top: 1em;
+    right: 1em;
+    font-size: 0.8em;
+    padding: 0.4em 0.5em;
+  }
+}
+#resultContainer .resultContainerCentered #imageContainer .zoom {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.3s ease, transform-origin 0.3s ease;
+  will-change: transform, transform-origin;
+}
+#resultContainer .resultContainerCentered #imageContainer:hover .zoom {
+  transform: scale(2);
+  transform-origin: center;
+  z-index: 99;
+}
+#resultContainer footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(0.7em, 2vw, 0.8em);
+}
+#resultContainer footer a {
+  color: aquamarine;
+  text-decoration: none;
+}
