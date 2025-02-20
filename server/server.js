@@ -94,16 +94,13 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 // Apply the function to get the first 9 images of the uploads folder
 app.get('/api/uploads', async (req, res) => {
     try {
-        const userToken = req.query.userToken; // Get user token
-        if (!userToken) return res.status(400).json({ error: 'Missing user token.' });
-
         // Define the limit to load images. By default, it loads 9 images
-        const limit = req.query.limit || 9;
+        const limit = parseInt(req.query.limit) || 9;
 
         // Define user-specific folder inside 'uploads'. So it's uploads/userToken
-        const userFolder = path.join(UPLOADS_DIR, userToken);
+        const folder = req.query.folder
         const images = await getGalleryImages(UPLOADS_DIR, limit);
-        const urlImages = images.map(image => `uploads/${userToken}/${path.basename(image)}`);
+        const urlImages = images.map(image => `/${folder}/${path.basename(image)}`);
         
         res.json(urlImages);
     } catch (error) {
